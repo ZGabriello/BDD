@@ -141,3 +141,29 @@ CREATE TABLE "TPCSV_INS_BRUT" (
    FROM TPCSV_INS_BRUT
    GROUP BY CODE_DOMAINE;
    
+ --exercice 2
+--1) 198 identifiants dans la table tpcsv_eta_brut
+select count(distinct IDENTIFIANT) 
+from TPCSV_ETA_BRUT;
+
+select identifiant, count(libelle) 
+from TPCSV_ETA_BRUT
+group by identifiant
+having count(LIBELLE)>1;
+
+--2)
+
+delete from TPCSV_ETA_BRUT
+where IDENTIFIANT is null;
+
+--3)
+--libelle unique:
+select libelle, count(libelle)
+from TPCSV_ETA_BRUT
+group by libelle;
+
+--sigle:
+select *
+from TPCSV_ETA_BRUT t1, TPCSV_ETA_BRUT t2 
+where t1.sigle is not null and t2.sigle is not null and t1.sigle = t2.sigle and t1.identifiant!=t2.identifiant;
+   
